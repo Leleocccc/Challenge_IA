@@ -11,6 +11,16 @@ const users = [
     role: "Gerente",
     department: "Marketing",
     password: "senha123",
+    manager: {
+      id: "99999",
+      name: "Carlos Mendes",
+      role: "Diretor",
+      department: "Marketing"
+    },
+    team: [
+      { id: "11111", name: "Ana Costa", role: "Analista", department: "Marketing" },
+      { id: "22222", name: "Pedro Santos", role: "Coordenador", department: "Marketing" }
+    ]
   },
   {
     id: "67890",
@@ -19,6 +29,13 @@ const users = [
     role: "Analista",
     department: "P&D",
     password: "senha456",
+    manager: {
+      id: "33333",
+      name: "Roberto Lima",
+      role: "Gerente",
+      department: "P&D"
+    },
+    team: []
   },
   {
     id: "551192",
@@ -27,6 +44,16 @@ const users = [
     role: "Colaborador",
     department: "TI",
     password: "1234",
+    manager: {
+      id: "44444",
+      name: "Fernanda Alves",
+      role: "Gerente",
+      department: "TI"
+    },
+    team: [
+      { id: "55555", name: "Lucas Pereira", role: "Desenvolvedor", department: "TI" },
+      { id: "66666", name: "Camila Souza", role: "Analista de Sistemas", department: "TI" }
+    ]
   },
 ];
 
@@ -39,6 +66,20 @@ interface User {
   id: string;
   name: string;
   role: string;
+  email?: string;
+  department?: string;
+  manager?: {
+    id: string;
+    name: string;
+    role: string;
+    department: string;
+  };
+  team?: Array<{
+    id: string;
+    name: string;
+    role: string;
+    department: string;
+  }>;
 }
 
 interface AuthContextType {
