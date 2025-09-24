@@ -26,27 +26,28 @@ export function Sidebar() {
   }
 
   return (
-    <div className="flex h-full w-64 flex-col bg-sidebar border-r border-sidebar-border">
+    <div className="flex h-full w-64 flex-col bg-gradient-to-b from-white to-gray-50 border-r border-gray-200 shadow-lg">
       {/* Logo */}
-      <div className="flex h-16 items-center justify-center border-b border-sidebar-border">
-        <div className="flex items-center space-x-2">
-          <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center">
-            <div className="h-4 w-4 text-primary-foreground">
+      <div className="flex h-20 items-center justify-center border-b border-gray-200 bg-gradient-to-r from-primary to-accent">
+        <div className="flex items-center space-x-3">
+          <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center shadow-md">
+            <div className="h-6 w-6 text-primary">
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
               </svg>
             </div>
           </div>
           <div>
-            <h1 className="text-lg font-bold text-sidebar-foreground">
-              INOVA<span className="text-accent">.AI</span>
+            <h1 className="text-xl font-bold text-white">
+              EUROFARMA
             </h1>
+            <p className="text-xs text-white/80 font-medium">Movidos pela vida</p>
           </div>
         </div>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 space-y-1 p-4">
+      <nav className="flex-1 space-y-2 p-4">
         {navigation.map((item) => {
           const isActive = pathname === item.href
           return (
@@ -54,13 +55,16 @@ export function Sidebar() {
               key={item.name}
               href={item.href}
               className={cn(
-                "flex items-center space-x-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                "flex items-center space-x-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 group",
                 isActive
-                  ? "bg-sidebar-primary text-sidebar-primary-foreground"
-                  : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                  ? "bg-primary text-white shadow-md"
+                  : "text-gray-700 hover:bg-primary/10 hover:text-primary hover:shadow-sm",
               )}
             >
-              <item.icon className="h-5 w-5" />
+              <item.icon className={cn(
+                "h-5 w-5 transition-colors",
+                isActive ? "text-white" : "text-gray-500 group-hover:text-primary"
+              )} />
               <span>{item.name}</span>
             </Link>
           )
@@ -68,21 +72,21 @@ export function Sidebar() {
       </nav>
 
       {/* User Profile */}
-      <div className="border-t border-sidebar-border p-4">
-        <div className="flex items-center space-x-3 mb-3">
-          <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center">
-            <User className="h-4 w-4 text-muted-foreground" />
+      <div className="border-t border-gray-200 p-4 bg-gradient-to-r from-gray-50 to-white">
+        <div className="flex items-center space-x-3 mb-4">
+          <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-md">
+            <User className="h-5 w-5 text-white" />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-sidebar-foreground truncate">{user?.name || "Usuário"}</p>
-            <p className="text-xs text-muted-foreground truncate">{user?.role || "Colaborador"}</p>
+            <p className="text-sm font-semibold text-gray-900 truncate">{user?.name || "Usuário"}</p>
+            <p className="text-xs text-gray-500 truncate">{user?.role || "Colaborador"}</p>
           </div>
         </div>
         <div className="flex space-x-2">
-          <Button variant="ghost" size="sm" className="flex-1">
+          <Button variant="ghost" size="sm" className="flex-1 hover:bg-primary/10 hover:text-primary">
             <Settings className="h-4 w-4" />
           </Button>
-          <Button variant="ghost" size="sm" className="flex-1" onClick={handleLogout}>
+          <Button variant="ghost" size="sm" className="flex-1 hover:bg-red-50 hover:text-red-600" onClick={handleLogout}>
             <LogOut className="h-4 w-4" />
           </Button>
         </div>

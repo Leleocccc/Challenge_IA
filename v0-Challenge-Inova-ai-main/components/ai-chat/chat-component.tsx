@@ -73,11 +73,15 @@ export default function ChatComponent() {
 
   // Função para rolar para a última mensagem
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    if (messagesEndRef.current) {
+      // Usar scrollTop em vez de scrollIntoView para evitar interferência com a posição da página
+      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight
+    }
   }
 
   useEffect(() => {
-    scrollToBottom()
+    // Usar setTimeout para garantir que o DOM foi atualizado
+    setTimeout(scrollToBottom, 100)
   }, [messages])
 
   // Banco de dados de prompts específicos para ideias de negócios e inovação
@@ -406,7 +410,7 @@ export default function ChatComponent() {
     <Card className="w-full h-[600px] flex flex-col">
       <CardContent className="flex flex-col h-full p-4">
         {/* Área de mensagens */}
-        <div className="flex-1 overflow-y-auto mb-4 pr-2">
+        <div className="flex-1 overflow-y-auto mb-4 pr-2" ref={messagesEndRef}>
           {messages.map((message) => (
             <ChatMessage key={message.id} message={message} />
           ))}
@@ -424,7 +428,7 @@ export default function ChatComponent() {
               </div>
             </div>
           )}
-          <div ref={messagesEndRef} />
+          <div className="h-1" />
         </div>
 
         {/* Área de input */}

@@ -72,8 +72,8 @@ export default function Dashboard() {
   const handleNewIdea = () => {
     router.push("/submit-idea")
   }
-  
-  const handleFilterChange = (filterType, value) => {
+
+  const handleFilterChange = (filterType: string, value: string) => {
     setFilters(prev => ({
       ...prev,
       [filterType]: value
@@ -81,14 +81,18 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-8 bg-gradient-to-br from-gray-50 to-white min-h-screen">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
-          <p className="text-muted-foreground">Bem-vindo ao portal de inovação da Eurofarma</p>
+          <h1 className="eurofarma-header eurofarma-gradient-text">
+            Bem-vindo, {user?.name || "Colaborador"}!
+          </h1>
+          <p className="eurofarma-subheader">
+            Movidos pela vida • Portal de Inovação Eurofarma
+          </p>
         </div>
-        <Button className="bg-primary hover:bg-primary/90" onClick={handleNewIdea}>
+        <Button className="eurofarma-button-primary" onClick={handleNewIdea}>
           <Plus className="h-4 w-4 mr-2" />
           Nova Ideia
         </Button>
@@ -96,59 +100,67 @@ export default function Dashboard() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="cursor-pointer hover:shadow-md transition-shadow" onClick={() => router.push("/my-ideas")}>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Minhas Ideias</CardTitle>
-            <Lightbulb className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-card-foreground">{userIdeas.length}</div>
-            <p className="text-xs text-muted-foreground">{userIdeas.length > 0 ? `Última em ${new Date(userIdeas[0].submittedAt).toLocaleDateString('pt-BR')}` : 'Nenhuma ideia ainda'}</p>
-          </CardContent>
-        </Card>
+        <div className="eurofarma-metric-card cursor-pointer hover:shadow-xl transition-all duration-300" onClick={() => router.push("/my-ideas")}>
+          <div className="flex items-center justify-between mb-4">
+            <div className="p-3 rounded-full bg-primary/10">
+              <Lightbulb className="h-6 w-6 text-primary" />
+            </div>
+            <div className="text-right">
+              <div className="text-3xl font-bold text-primary">{userIdeas.length}</div>
+              <p className="text-sm font-medium text-gray-600">Minhas Ideias</p>
+            </div>
+          </div>
+          <p className="text-xs text-gray-500">{userIdeas.length > 0 ? `Última em ${new Date(userIdeas[0].submittedAt).toLocaleDateString('pt-BR')}` : 'Nenhuma ideia ainda'}</p>
+        </div>
 
-        <Card className="cursor-pointer hover:shadow-md transition-shadow" onClick={() => router.push("/my-ideas")}>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Em Avaliação</CardTitle>
-            <Eye className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-card-foreground">{userIdeas.filter(idea => idea.status === "Em Avaliação").length}</div>
-            <p className="text-xs text-muted-foreground">Aguardando feedback</p>
-          </CardContent>
-        </Card>
+        <div className="eurofarma-metric-card cursor-pointer hover:shadow-xl transition-all duration-300" onClick={() => router.push("/my-ideas")}>
+          <div className="flex items-center justify-between mb-4">
+            <div className="p-3 rounded-full bg-yellow-100">
+              <Eye className="h-6 w-6 text-yellow-600" />
+            </div>
+            <div className="text-right">
+              <div className="text-3xl font-bold text-yellow-600">{userIdeas.filter(idea => idea.status === "Em Avaliação").length}</div>
+              <p className="text-sm font-medium text-gray-600">Em Avaliação</p>
+            </div>
+          </div>
+          <p className="text-xs text-gray-500">Aguardando feedback</p>
+        </div>
 
-        <Card className="cursor-pointer hover:shadow-md transition-shadow" onClick={() => router.push("/leaderboard")}>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Pontos</CardTitle>
-            <Star className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-card-foreground">2,450</div>
-            <p className="text-xs text-muted-foreground">Ranking #8</p>
-          </CardContent>
-        </Card>
+        <div className="eurofarma-metric-card cursor-pointer hover:shadow-xl transition-all duration-300" onClick={() => router.push("/leaderboard")}>
+          <div className="flex items-center justify-between mb-4">
+            <div className="p-3 rounded-full bg-secondary/10">
+              <Star className="h-6 w-6 text-secondary" />
+            </div>
+            <div className="text-right">
+              <div className="text-3xl font-bold text-secondary">2,450</div>
+              <p className="text-sm font-medium text-gray-600">Pontos</p>
+            </div>
+          </div>
+          <p className="text-xs text-gray-500">Ranking #8</p>
+        </div>
 
-        <Card className="cursor-pointer hover:shadow-md transition-shadow" onClick={() => router.push("/my-ideas")}>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Aprovadas</CardTitle>
-            <Award className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-card-foreground">{userIdeas.filter(idea => idea.status === "Aprovada" || idea.status === "Em Desenvolvimento").length}</div>
-            <p className="text-xs text-muted-foreground">{userIdeas.filter(idea => idea.status === "Em Desenvolvimento").length} em implementação</p>
-          </CardContent>
-        </Card>
+        <div className="eurofarma-metric-card cursor-pointer hover:shadow-xl transition-all duration-300" onClick={() => router.push("/my-ideas")}>
+          <div className="flex items-center justify-between mb-4">
+            <div className="p-3 rounded-full bg-green-100">
+              <Award className="h-6 w-6 text-green-600" />
+            </div>
+            <div className="text-right">
+              <div className="text-3xl font-bold text-green-600">{userIdeas.filter(idea => idea.status === "Aprovada" || idea.status === "Em Desenvolvimento").length}</div>
+              <p className="text-sm font-medium text-gray-600">Aprovadas</p>
+            </div>
+          </div>
+          <p className="text-xs text-gray-500">{userIdeas.filter(idea => idea.status === "Em Desenvolvimento").length} em implementação</p>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Ideas */}
-        <Card>
-          <CardHeader>
-            <div className="flex items-center justify-between">
+        <div className="eurofarma-card">
+          <div className="p-6">
+            <div className="flex items-center justify-between mb-6">
               <div>
-                <CardTitle>Ideias Recentes</CardTitle>
-                <CardDescription>Últimas ideias submetidas na plataforma</CardDescription>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Ideias Recentes</h3>
+                <p className="text-gray-600">Últimas ideias submetidas na plataforma</p>
               </div>
               <div className="flex space-x-2">
                 <select 
@@ -177,8 +189,8 @@ export default function Dashboard() {
                 </select>
               </div>
             </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
+          </div>
+          <div className="space-y-4">
             {filteredIdeas.length > 0 ? filteredIdeas.map((idea, index) => (
               <div key={index} className="flex items-center justify-between p-3 border rounded-lg cursor-pointer hover:shadow-md transition-shadow" onClick={() => router.push(`/idea-details/${idea.id}`)}>
                 <div className="space-y-1">
@@ -206,8 +218,8 @@ export default function Dashboard() {
                 Nenhuma ideia encontrada com os filtros selecionados.
               </div>
             )}
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
         {/* Gamification Progress */}
         <Card className="cursor-pointer hover:shadow-md transition-shadow" onClick={() => router.push("/leaderboard")}>

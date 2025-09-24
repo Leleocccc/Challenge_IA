@@ -98,19 +98,19 @@ export default function AISuggestionsPage() {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-8 bg-gradient-to-br from-gray-50 to-white min-h-screen">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">IA Sugestões</h1>
-          <p className="text-gray-600 mt-1">Projetos inovadores sugeridos pela inteligência artificial</p>
+          <h1 className="eurofarma-header eurofarma-gradient-text">IA Sugestões</h1>
+          <p className="eurofarma-subheader">Projetos inovadores sugeridos pela inteligência artificial • Movidos pela vida</p>
         </div>
-        <div className="flex space-x-2">
-          <Button onClick={() => setShowChat(!showChat)} className="bg-green-600 hover:bg-green-700">
+        <div className="flex space-x-3">
+          <Button onClick={() => setShowChat(!showChat)} className="eurofarma-button-secondary">
             <MessageSquare className="h-4 w-4 mr-2" />
             {showChat ? "Fechar Chat" : "Abrir Chat de IA"}
           </Button>
-          <Button onClick={handleGenerateNew} disabled={isGenerating} className="bg-blue-600 hover:bg-blue-700">
+          <Button onClick={handleGenerateNew} disabled={isGenerating} className="eurofarma-button-primary">
             {isGenerating ? (
               <>
                 <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
@@ -147,124 +147,126 @@ export default function AISuggestionsPage() {
       )}
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <Lightbulb className="h-5 w-5 text-yellow-500" />
-              <div>
-                <p className="text-sm text-gray-600">Sugestões Ativas</p>
-                <p className="text-2xl font-bold">24</p>
-              </div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="eurofarma-metric-card">
+          <div className="flex items-center justify-between mb-4">
+            <div className="p-3 rounded-full bg-secondary/10">
+              <Lightbulb className="h-6 w-6 text-secondary" />
             </div>
-          </CardContent>
-        </Card>
+            <div className="text-right">
+              <div className="text-3xl font-bold text-secondary">24</div>
+              <p className="text-sm font-medium text-gray-600">Sugestões Ativas</p>
+            </div>
+          </div>
+          <p className="text-xs text-gray-500">Ideias em desenvolvimento</p>
+        </div>
 
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <TrendingUp className="h-5 w-5 text-green-500" />
-              <div>
-                <p className="text-sm text-gray-600">Taxa de Sucesso</p>
-                <p className="text-2xl font-bold">87%</p>
-              </div>
+        <div className="eurofarma-metric-card">
+          <div className="flex items-center justify-between mb-4">
+            <div className="p-3 rounded-full bg-green-100">
+              <TrendingUp className="h-6 w-6 text-green-600" />
             </div>
-          </CardContent>
-        </Card>
+            <div className="text-right">
+              <div className="text-3xl font-bold text-green-600">87%</div>
+              <p className="text-sm font-medium text-gray-600">Taxa de Sucesso</p>
+            </div>
+          </div>
+          <p className="text-xs text-gray-500">Ideias aprovadas</p>
+        </div>
 
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <Users className="h-5 w-5 text-blue-500" />
-              <div>
-                <p className="text-sm text-gray-600">Implementadas</p>
-                <p className="text-2xl font-bold">12</p>
-              </div>
+        <div className="eurofarma-metric-card">
+          <div className="flex items-center justify-between mb-4">
+            <div className="p-3 rounded-full bg-primary/10">
+              <Users className="h-6 w-6 text-primary" />
             </div>
-          </CardContent>
-        </Card>
+            <div className="text-right">
+              <div className="text-3xl font-bold text-primary">12</div>
+              <p className="text-sm font-medium text-gray-600">Implementadas</p>
+            </div>
+          </div>
+          <p className="text-xs text-gray-500">Projetos em produção</p>
+        </div>
 
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <Clock className="h-5 w-5 text-orange-500" />
-              <div>
-                <p className="text-sm text-gray-600">Em Análise</p>
-                <p className="text-2xl font-bold">8</p>
-              </div>
+        <div className="eurofarma-metric-card">
+          <div className="flex items-center justify-between mb-4">
+            <div className="p-3 rounded-full bg-yellow-100">
+              <Clock className="h-6 w-6 text-yellow-600" />
             </div>
-          </CardContent>
-        </Card>
+            <div className="text-right">
+              <div className="text-3xl font-bold text-yellow-600">8</div>
+              <p className="text-sm font-medium text-gray-600">Em Análise</p>
+            </div>
+          </div>
+          <p className="text-xs text-gray-500">Aguardando avaliação</p>
+        </div>
       </div>
 
       {/* AI Suggestions List */}
-      <div className="space-y-4">
+      <div className="space-y-6">
         {suggestions.map((suggestion) => (
-          <Card key={suggestion.id} className="hover:shadow-md transition-shadow">
-            <CardHeader>
-              <div className="flex items-start justify-between">
+          <div key={suggestion.id} className="eurofarma-card hover:shadow-xl transition-all duration-300">
+            <div className="p-6">
+              <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
-                  <CardTitle className="text-lg text-gray-900">{suggestion.title}</CardTitle>
-                  <CardDescription className="mt-2 text-gray-600">{suggestion.description}</CardDescription>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">{suggestion.title}</h3>
+                  <p className="text-gray-600 leading-relaxed">{suggestion.description}</p>
                 </div>
-                <div className="flex items-center space-x-2 ml-4">
-                  <Badge variant="outline" className="bg-blue-50 text-blue-700">
+                <div className="flex items-center space-x-2 ml-6">
+                  <div className="eurofarma-innovation-badge">
                     {suggestion.confidence}% confiança
-                  </Badge>
+                  </div>
                 </div>
               </div>
-            </CardHeader>
 
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                 <div>
-                  <p className="text-sm font-medium text-gray-700">Categoria</p>
-                  <Badge variant="outline" className="mt-1">
+                  <p className="text-sm font-medium text-gray-700 mb-2">Categoria</p>
+                  <div className="eurofarma-innovation-badge">
                     {suggestion.category}
-                  </Badge>
+                  </div>
                 </div>
 
                 <div>
-                  <p className="text-sm font-medium text-gray-700">Prioridade</p>
-                  <Badge className={`mt-1 ${getPriorityColor(suggestion.priority)}`}>{suggestion.priority}</Badge>
+                  <p className="text-sm font-medium text-gray-700 mb-2">Prioridade</p>
+                  <Badge className={`${getPriorityColor(suggestion.priority)}`}>{suggestion.priority}</Badge>
                 </div>
 
                 <div>
-                  <p className="text-sm font-medium text-gray-700">Complexidade</p>
-                  <Badge className={`mt-1 ${getComplexityColor(suggestion.complexity)}`}>{suggestion.complexity}</Badge>
+                  <p className="text-sm font-medium text-gray-700 mb-2">Complexidade</p>
+                  <Badge className={`${getComplexityColor(suggestion.complexity)}`}>{suggestion.complexity}</Badge>
                 </div>
 
                 <div>
-                  <p className="text-sm font-medium text-gray-700">Prazo Estimado</p>
-                  <p className="text-sm text-gray-600 mt-1">{suggestion.timeframe}</p>
+                  <p className="text-sm font-medium text-gray-700 mb-2">Prazo Estimado</p>
+                  <p className="text-sm text-gray-600">{suggestion.timeframe}</p>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div>
-                  <p className="text-sm font-medium text-gray-700">Impacto Estimado</p>
-                  <p className="text-sm text-gray-600 mt-1">{suggestion.estimatedImpact}</p>
+                  <p className="text-sm font-medium text-gray-700 mb-2">Impacto Estimado</p>
+                  <p className="text-sm text-gray-600">{suggestion.estimatedImpact}</p>
                 </div>
 
                 <div>
-                  <p className="text-sm font-medium text-gray-700">Departamento Sugerido</p>
-                  <p className="text-sm text-gray-600 mt-1">{suggestion.department}</p>
+                  <p className="text-sm font-medium text-gray-700 mb-2">Departamento Sugerido</p>
+                  <p className="text-sm text-gray-600">{suggestion.department}</p>
                 </div>
               </div>
 
-              <div className="flex space-x-2">
-                <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+              <div className="flex space-x-3">
+                <Button size="sm" className="eurofarma-button-primary">
                   Submeter como Ideia
                 </Button>
-                <Button size="sm" variant="outline">
+                <Button size="sm" variant="outline" className="hover:bg-gray-50">
                   Salvar para Depois
                 </Button>
-                <Button size="sm" variant="outline">
+                <Button size="sm" variant="outline" className="hover:bg-gray-50">
                   Compartilhar
                 </Button>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         ))}
       </div>
     </div>

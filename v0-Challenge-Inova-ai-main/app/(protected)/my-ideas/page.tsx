@@ -48,32 +48,35 @@ export default function MyIdeas() {
   };
   
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-8 bg-gradient-to-br from-gray-50 to-white min-h-screen">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Minhas Ideias</h1>
-          <p className="text-muted-foreground">Acompanhe o status das suas submissões</p>
+          <h1 className="eurofarma-header eurofarma-gradient-text">Minhas Ideias</h1>
+          <p className="eurofarma-subheader">Acompanhe o status das suas submissões • Movidos pela vida</p>
         </div>
-        <Button className="bg-primary hover:bg-primary/90" onClick={handleNewIdea}>Nova Ideia</Button>
+        <Button className="eurofarma-button-primary" onClick={handleNewIdea}>
+          <Plus className="h-4 w-4 mr-2" />
+          Nova Ideia
+        </Button>
       </div>
 
       {/* Filters */}
-      <Card>
-        <CardContent className="pt-6">
+      <div className="eurofarma-card">
+        <div className="p-6">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
               <div className="relative">
                 <Input 
                   placeholder="Buscar ideias..." 
-                  className="pl-10" 
+                  className="pl-10 border-gray-300 focus:border-primary focus:ring-primary" 
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </div>
             </div>
             <Select value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTrigger className="w-full md:w-48">
+              <SelectTrigger className="w-full md:w-48 border-gray-300 focus:border-primary focus:ring-primary">
                 <SelectValue placeholder="Status" />
               </SelectTrigger>
               <SelectContent>
@@ -85,7 +88,7 @@ export default function MyIdeas() {
               </SelectContent>
             </Select>
             <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-              <SelectTrigger className="w-full md:w-48">
+              <SelectTrigger className="w-full md:w-48 border-gray-300 focus:border-primary focus:ring-primary">
                 <SelectValue placeholder="Categoria" />
               </SelectTrigger>
               <SelectContent>
@@ -97,25 +100,27 @@ export default function MyIdeas() {
               </SelectContent>
             </Select>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Ideas List */}
-      <div className="space-y-4">
+      <div className="space-y-6">
         {filteredIdeas.length > 0 ? (
           filteredIdeas.map((idea) => {
             const StatusIcon = statusIcons[idea.status as keyof typeof statusIcons]
 
             return (
-              <Card key={idea.id} className="hover:shadow-md transition-shadow">
-                <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <div className="space-y-2">
-                      <div className="flex items-center space-x-2">
-                        <CardTitle className="text-lg">{idea.title}</CardTitle>
-                        <Badge variant="outline">{idea.category}</Badge>
+              <div key={idea.id} className="eurofarma-card hover:shadow-xl transition-all duration-300">
+                <div className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="space-y-3">
+                      <div className="flex items-center space-x-3">
+                        <h3 className="text-xl font-bold text-gray-900">{idea.title}</h3>
+                        <div className="eurofarma-innovation-badge">
+                          {idea.category}
+                        </div>
                       </div>
-                      <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+                      <div className="flex items-center space-x-6 text-sm text-gray-500">
                         <span>Enviada em {new Date(idea.submittedAt).toLocaleDateString('pt-BR')}</span>
                         <div className="flex items-center space-x-1">
                           <Eye className="h-4 w-4" />
@@ -128,102 +133,108 @@ export default function MyIdeas() {
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <StatusIcon className="h-4 w-4" />
+                      <StatusIcon className="h-5 w-5" />
                       <Badge 
-                        className={idea.status === "Em Avaliação" ? "bg-yellow-100 text-yellow-800" :
-                                  idea.status === "Aprovada" ? "bg-green-100 text-green-800" :
-                                  idea.status === "Em Desenvolvimento" ? "bg-blue-100 text-blue-800" :
-                                  "bg-red-100 text-red-800"}
+                        className={idea.status === "Em Avaliação" ? "bg-yellow-100 text-yellow-800 border-yellow-200" :
+                                  idea.status === "Aprovada" ? "bg-green-100 text-green-800 border-green-200" :
+                                  idea.status === "Em Desenvolvimento" ? "bg-blue-100 text-blue-800 border-blue-200" :
+                                  "bg-red-100 text-red-800 border-red-200"}
                       >
                         {idea.status}
                       </Badge>
                     </div>
                   </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <p className="text-sm text-muted-foreground">{idea.description}</p>
+                  <p className="text-gray-600 leading-relaxed mb-4">{idea.description}</p>
 
                   {/* Feedback Section */}
                   {idea.feedback && (
-                    <div className="p-3 bg-muted rounded-lg">
+                    <div className="p-4 bg-gray-50 rounded-lg border border-gray-200 mb-4">
                       <div className="flex items-center space-x-2 mb-2">
-                        <MessageSquare className="h-4 w-4 text-muted-foreground" />
-                        <span className="text-sm font-medium">Último Feedback</span>
+                        <MessageSquare className="h-4 w-4 text-primary" />
+                        <span className="text-sm font-medium text-gray-900">Último Feedback</span>
                       </div>
-                      <p className="text-sm text-muted-foreground">{idea.feedback}</p>
+                      <p className="text-sm text-gray-600">{idea.feedback}</p>
                     </div>
                   )}
 
                   {/* Actions */}
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-3">
                     <Button 
                       variant="outline" 
                       size="sm"
+                      className="eurofarma-button-primary"
                       onClick={() => router.push(`/idea-details/${idea.id}`)}
                     >
                       Ver Detalhes
                     </Button>
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" className="hover:bg-gray-50">
                       Comentários ({idea.comments || 0})
                     </Button>
                     {idea.status === "Rejeitada" && (
-                      <Button variant="outline" size="sm" className="text-accent bg-transparent">
+                      <Button variant="outline" size="sm" className="text-secondary hover:bg-secondary/10">
                         Reenviar
                       </Button>
                     )}
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             )
           })
         ) : (
-          <Card className="p-6 text-center">
-            <p className="text-muted-foreground mb-4">Nenhuma ideia encontrada com os filtros selecionados.</p>
-            <Button onClick={() => {
-              setSearchTerm("");
-              setStatusFilter("");
-              setCategoryFilter("");
-            }}>
+          <div className="eurofarma-card text-center p-12">
+            <div className="mb-6">
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Plus className="h-8 w-8 text-gray-400" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Nenhuma ideia encontrada</h3>
+              <p className="text-gray-600 mb-6">Nenhuma ideia encontrada com os filtros selecionados.</p>
+            </div>
+            <Button 
+              className="eurofarma-button-primary"
+              onClick={() => {
+                setSearchTerm("");
+                setStatusFilter("");
+                setCategoryFilter("");
+              }}
+            >
               Limpar Filtros
             </Button>
-          </Card>
+          </div>
         )}
       </div>
 
       {/* Summary Stats */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Resumo das Suas Ideias</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="eurofarma-card">
+        <div className="p-6">
+          <h3 className="text-xl font-bold text-gray-900 mb-6">Resumo das Suas Ideias</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="text-center">
-              <div className="text-2xl font-bold text-card-foreground">{userIdeas.length}</div>
-              <div className="text-sm text-muted-foreground">Total de Ideias</div>
+              <div className="text-3xl font-bold text-primary mb-2">{userIdeas.length}</div>
+              <div className="text-sm font-medium text-gray-600">Total de Ideias</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-yellow-600">
+              <div className="text-3xl font-bold text-yellow-600 mb-2">
                 {userIdeas.filter(idea => idea.status === "Em Avaliação").length}
               </div>
-              <div className="text-sm text-muted-foreground">Em Avaliação</div>
+              <div className="text-sm font-medium text-gray-600">Em Avaliação</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-600">
+              <div className="text-3xl font-bold text-green-600 mb-2">
                 {userIdeas.filter(idea => idea.status === "Aprovada" || idea.status === "Em Desenvolvimento").length}
               </div>
-              <div className="text-sm text-muted-foreground">Aprovadas</div>
+              <div className="text-sm font-medium text-gray-600">Aprovadas</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600">
+              <div className="text-3xl font-bold text-blue-600 mb-2">
                 {userIdeas.length > 0 
                   ? `${Math.round((userIdeas.filter(idea => idea.status === "Aprovada" || idea.status === "Em Desenvolvimento").length / userIdeas.length) * 100)}%` 
                   : "0%"}
               </div>
-              <div className="text-sm text-muted-foreground">Taxa de Sucesso</div>
+              <div className="text-sm font-medium text-gray-600">Taxa de Sucesso</div>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }

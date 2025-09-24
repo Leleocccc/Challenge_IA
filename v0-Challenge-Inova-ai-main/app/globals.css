@@ -5,44 +5,42 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #475569;
-  --card: #eff6ff;
-  --card-foreground: #1e40af;
+  --foreground: #2c3e50;
+  --card: #f8fafc;
+  --card-foreground: #1e3a8a;
   --popover: #ffffff;
-  --popover-foreground: #475569;
-  --primary: #1e40af;
+  --popover-foreground: #2c3e50;
+  /* Eurofarma Blue - Primary */
+  --primary: #1e3a8a;
   --primary-foreground: #ffffff;
-  /* Darkened yellow for better contrast */
-  --secondary: #ca8a04;
+  /* Eurofarma Yellow - Secondary */
+  --secondary: #f59e0b;
   --secondary-foreground: #ffffff;
-  --muted: #fefce8;
-  --muted-foreground: #4b5563;
-  /* Using darker yellow for accent */
-  --accent: #ca8a04;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  /* Eurofarma Accent */
+  --accent: #3b82f6;
   --accent-foreground: #ffffff;
-  --destructive: #f97316;
+  --destructive: #ef4444;
   --destructive-foreground: #ffffff;
   --border: #e2e8f0;
   --input: #ffffff;
-  /* Using darker yellow for ring */
-  --ring: #ca8a04;
-  --chart-1: #1e40af;
-  /* Using darker yellow for charts */
-  --chart-2: #ca8a04;
-  --chart-3: #4b5563;
-  --chart-4: #eff6ff;
-  --chart-5: #ffffff;
-  --radius: 0.5rem;
-  --sidebar: #eff6ff;
-  --sidebar-foreground: #475569;
-  --sidebar-primary: #1e40af;
+  --ring: #3b82f6;
+  /* Chart colors with Eurofarma palette */
+  --chart-1: #1e3a8a;
+  --chart-2: #f59e0b;
+  --chart-3: #3b82f6;
+  --chart-4: #10b981;
+  --chart-5: #8b5cf6;
+  --radius: 0.75rem;
+  --sidebar: #f8fafc;
+  --sidebar-foreground: #2c3e50;
+  --sidebar-primary: #1e3a8a;
   --sidebar-primary-foreground: #ffffff;
-  /* Using darker yellow for sidebar accent */
-  --sidebar-accent: #ca8a04;
+  --sidebar-accent: #f59e0b;
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #e2e8f0;
-  /* Using darker yellow for sidebar ring */
-  --sidebar-ring: #ca8a04;
+  --sidebar-ring: #3b82f6;
 }
 
 .dark {
@@ -52,38 +50,36 @@
   --card-foreground: #e2e8f0;
   --popover: #1e293b;
   --popover-foreground: #e2e8f0;
+  /* Eurofarma Blue - Dark mode */
   --primary: #3b82f6;
   --primary-foreground: #0f172a;
-  /* Lighter yellow for dark mode */
+  /* Eurofarma Yellow - Dark mode */
   --secondary: #fbbf24;
   --secondary-foreground: #0f172a;
   --muted: #334155;
   --muted-foreground: #94a3b8;
-  /* Lighter yellow for dark mode accent */
-  --accent: #fbbf24;
+  /* Eurofarma Accent - Dark mode */
+  --accent: #60a5fa;
   --accent-foreground: #0f172a;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
   --border: #334155;
   --input: #1e293b;
-  /* Lighter yellow for dark mode ring */
-  --ring: #fbbf24;
+  --ring: #60a5fa;
+  /* Chart colors for dark mode */
   --chart-1: #3b82f6;
-  /* Lighter yellow for dark mode charts */
   --chart-2: #fbbf24;
-  --chart-3: #94a3b8;
-  --chart-4: #334155;
-  --chart-5: #1e293b;
+  --chart-3: #60a5fa;
+  --chart-4: #34d399;
+  --chart-5: #a78bfa;
   --sidebar: #1e293b;
   --sidebar-foreground: #e2e8f0;
   --sidebar-primary: #3b82f6;
   --sidebar-primary-foreground: #0f172a;
-  /* Lighter yellow for dark mode sidebar */
   --sidebar-accent: #fbbf24;
   --sidebar-accent-foreground: #0f172a;
   --sidebar-border: #334155;
-  /* Lighter yellow for dark mode sidebar ring */
-  --sidebar-ring: #fbbf24;
+  --sidebar-ring: #60a5fa;
 }
 
 @theme inline {
@@ -132,6 +128,52 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+@layer components {
+  /* Eurofarma Brand Styles */
+  .eurofarma-gradient {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  }
+  
+  .eurofarma-gradient-text {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .eurofarma-card {
+    @apply bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-300;
+  }
+  
+  .eurofarma-button-primary {
+    @apply bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-6 py-2.5 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md;
+  }
+  
+  .eurofarma-button-secondary {
+    @apply bg-secondary hover:bg-secondary/90 text-secondary-foreground font-medium px-6 py-2.5 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md;
+  }
+  
+  .eurofarma-header {
+    @apply text-3xl font-bold text-foreground mb-2;
+  }
+  
+  .eurofarma-subheader {
+    @apply text-lg text-muted-foreground mb-6;
+  }
+  
+  .eurofarma-metric-card {
+    @apply bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300;
+  }
+  
+  .eurofarma-innovation-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20;
+  }
+  
+  .eurofarma-sustainability-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 border border-green-200;
   }
 }

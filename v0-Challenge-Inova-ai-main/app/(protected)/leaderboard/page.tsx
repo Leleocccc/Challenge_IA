@@ -150,84 +150,90 @@ export default function LeaderboardPage() {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-8 bg-gradient-to-br from-gray-50 to-white min-h-screen">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Ranking de Inovação</h1>
-        <p className="text-gray-600 mt-1">Reconhecimento dos colaboradores mais inovadores da Eurofarma</p>
+        <h1 className="eurofarma-header eurofarma-gradient-text">Ranking de Inovação</h1>
+        <p className="eurofarma-subheader">Reconhecimento dos colaboradores mais inovadores • Movidos pela vida</p>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <Users className="h-5 w-5 text-blue-500" />
-              <div>
-                <p className="text-sm text-gray-600">Participantes Ativos</p>
-                <p className="text-2xl font-bold">156</p>
-              </div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="eurofarma-metric-card">
+          <div className="flex items-center justify-between mb-4">
+            <div className="p-3 rounded-full bg-primary/10">
+              <Users className="h-6 w-6 text-primary" />
             </div>
-          </CardContent>
-        </Card>
+            <div className="text-right">
+              <div className="text-3xl font-bold text-primary">156</div>
+              <p className="text-sm font-medium text-gray-600">Participantes Ativos</p>
+            </div>
+          </div>
+          <p className="text-xs text-gray-500">Colaboradores engajados</p>
+        </div>
 
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <Trophy className="h-5 w-5 text-yellow-500" />
-              <div>
-                <p className="text-sm text-gray-600">Total de Pontos</p>
-                <p className="text-2xl font-bold">45.2K</p>
-              </div>
+        <div className="eurofarma-metric-card">
+          <div className="flex items-center justify-between mb-4">
+            <div className="p-3 rounded-full bg-secondary/10">
+              <Trophy className="h-6 w-6 text-secondary" />
             </div>
-          </CardContent>
-        </Card>
+            <div className="text-right">
+              <div className="text-3xl font-bold text-secondary">45.2K</div>
+              <p className="text-sm font-medium text-gray-600">Total de Pontos</p>
+            </div>
+          </div>
+          <p className="text-xs text-gray-500">Pontuação acumulada</p>
+        </div>
 
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <Target className="h-5 w-5 text-green-500" />
-              <div>
-                <p className="text-sm text-gray-600">Ideias Implementadas</p>
-                <p className="text-2xl font-bold">27</p>
-              </div>
+        <div className="eurofarma-metric-card">
+          <div className="flex items-center justify-between mb-4">
+            <div className="p-3 rounded-full bg-green-100">
+              <Target className="h-6 w-6 text-green-600" />
             </div>
-          </CardContent>
-        </Card>
+            <div className="text-right">
+              <div className="text-3xl font-bold text-green-600">27</div>
+              <p className="text-sm font-medium text-gray-600">Ideias Implementadas</p>
+            </div>
+          </div>
+          <p className="text-xs text-gray-500">Projetos em produção</p>
+        </div>
 
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <Award className="h-5 w-5 text-purple-500" />
-              <div>
-                <p className="text-sm text-gray-600">Badges Conquistados</p>
-                <p className="text-2xl font-bold">89</p>
-              </div>
+        <div className="eurofarma-metric-card">
+          <div className="flex items-center justify-between mb-4">
+            <div className="p-3 rounded-full bg-purple-100">
+              <Award className="h-6 w-6 text-purple-600" />
             </div>
-          </CardContent>
-        </Card>
+            <div className="text-right">
+              <div className="text-3xl font-bold text-purple-600">89</div>
+              <p className="text-sm font-medium text-gray-600">Badges Conquistados</p>
+            </div>
+          </div>
+          <p className="text-xs text-gray-500">Conquistas alcançadas</p>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Top 3 Podium */}
         <div className="lg:col-span-2">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <Trophy className="h-5 w-5 text-yellow-500" />
-                <span>Top 3 Inovadores</span>
-              </CardTitle>
-              <CardDescription>Os colaboradores mais inovadores do mês</CardDescription>
-            </CardHeader>
-            <CardContent>
+          <div className="eurofarma-card">
+            <div className="p-6">
+              <div className="mb-6">
+                <div className="flex items-center space-x-3 mb-2">
+                  <div className="p-2 rounded-full bg-secondary/10">
+                    <Trophy className="h-6 w-6 text-secondary" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">Top 3 Inovadores</h3>
+                </div>
+                <p className="text-gray-600">Os colaboradores mais inovadores do mês</p>
+              </div>
               <div className="space-y-4">
                 {topUsers.map((user) => (
-                  <div key={user.id} className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
-                    <div className="flex items-center justify-center w-8 h-8">{getPositionIcon(user.position)}</div>
+                  <div key={user.id} className="flex items-center space-x-4 p-4 bg-gradient-to-r from-gray-50 to-white rounded-xl border border-gray-200 hover:shadow-md transition-all duration-300">
+                    <div className="flex items-center justify-center w-10 h-10">{getPositionIcon(user.position)}</div>
 
-                    <Avatar className="h-12 w-12">
+                    <Avatar className="h-14 w-14 border-2 border-white shadow-md">
                       <AvatarImage src={user.avatar || "/placeholder.svg"} alt={user.name} />
-                      <AvatarFallback>
+                      <AvatarFallback className="bg-primary text-white font-semibold">
                         {user.name
                           .split(" ")
                           .map((n) => n[0])
@@ -237,21 +243,21 @@ export default function LeaderboardPage() {
 
                     <div className="flex-1">
                       <div className="flex items-center space-x-2">
-                        <h3 className="font-semibold text-gray-900">{user.name}</h3>
+                        <h3 className="font-bold text-gray-900">{user.name}</h3>
                         {getTrendIcon(user.trend)}
                       </div>
                       <p className="text-sm text-gray-600">{user.department}</p>
-                      <div className="flex space-x-1 mt-1">
+                      <div className="flex space-x-1 mt-2">
                         {user.badges.slice(0, 2).map((badge, index) => (
-                          <Badge key={index} variant="secondary" className="text-xs">
+                          <div key={index} className="eurofarma-innovation-badge">
                             {badge}
-                          </Badge>
+                          </div>
                         ))}
                       </div>
                     </div>
 
                     <div className="text-right">
-                      <p className="text-lg font-bold text-blue-600">{user.points.toLocaleString()}</p>
+                      <p className="text-xl font-bold text-primary">{user.points.toLocaleString()}</p>
                       <p className="text-xs text-gray-500">+{user.monthlyPoints} este mês</p>
                       <div className="flex space-x-2 text-xs text-gray-600 mt-1">
                         <span>{user.ideasSubmitted} ideias</span>
@@ -262,64 +268,64 @@ export default function LeaderboardPage() {
                   </div>
                 ))}
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
 
         {/* Department Ranking */}
         <div>
-          <Card>
-            <CardHeader>
-              <CardTitle>Ranking por Departamento</CardTitle>
-              <CardDescription>Pontuação total por área</CardDescription>
-            </CardHeader>
-            <CardContent>
+          <div className="eurofarma-card">
+            <div className="p-6">
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Ranking por Departamento</h3>
+                <p className="text-gray-600">Pontuação total por área</p>
+              </div>
               <div className="space-y-3">
                 {departments.map((dept, index) => (
-                  <div key={dept.name} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                  <div key={dept.name} className="flex items-center justify-between p-4 bg-gradient-to-r from-gray-50 to-white rounded-xl border border-gray-200 hover:shadow-md transition-all duration-300">
                     <div className="flex items-center space-x-3">
-                      <span className="text-sm font-bold text-gray-500">#{index + 1}</span>
+                      <span className="text-sm font-bold text-primary">#{index + 1}</span>
                       <div>
-                        <p className="font-medium text-gray-900">{dept.name}</p>
+                        <p className="font-semibold text-gray-900">{dept.name}</p>
                         <p className="text-xs text-gray-600">{dept.members} membros</p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="font-bold text-blue-600">{dept.points.toLocaleString()}</p>
+                      <p className="font-bold text-primary">{dept.points.toLocaleString()}</p>
                       <p className="text-xs text-gray-500">Média: {dept.avgPoints}</p>
                     </div>
                   </div>
                 ))}
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Full Ranking */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Ranking Completo</CardTitle>
-          <CardDescription>Todos os participantes do programa de inovação</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-2">
+      <div className="eurofarma-card">
+        <div className="p-6">
+          <div className="mb-6">
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Ranking Completo</h3>
+            <p className="text-gray-600">Todos os participantes do programa de inovação</p>
+          </div>
+          <div className="space-y-3">
             {allUsers.map((user) => (
               <div
                 key={user.id}
-                className="flex items-center space-x-4 p-3 hover:bg-gray-50 rounded-lg transition-colors"
+                className="flex items-center space-x-4 p-4 hover:bg-gray-50 rounded-xl border border-gray-200 hover:shadow-md transition-all duration-300"
               >
-                <div className="flex items-center justify-center w-6 h-6">
+                <div className="flex items-center justify-center w-8 h-8">
                   {user.position <= 3 ? (
                     getPositionIcon(user.position)
                   ) : (
-                    <span className="text-sm font-medium text-gray-500">#{user.position}</span>
+                    <span className="text-sm font-bold text-gray-500">#{user.position}</span>
                   )}
                 </div>
 
-                <Avatar className="h-8 w-8">
+                <Avatar className="h-10 w-10 border border-gray-200">
                   <AvatarImage src={user.avatar || "/placeholder.svg"} alt={user.name} />
-                  <AvatarFallback className="text-xs">
+                  <AvatarFallback className="bg-primary text-white text-xs font-semibold">
                     {user.name
                       .split(" ")
                       .map((n) => n[0])
@@ -329,14 +335,14 @@ export default function LeaderboardPage() {
 
                 <div className="flex-1">
                   <div className="flex items-center space-x-2">
-                    <p className="font-medium text-gray-900">{user.name}</p>
+                    <p className="font-semibold text-gray-900">{user.name}</p>
                     {getTrendIcon(user.trend)}
                   </div>
                   <p className="text-xs text-gray-600">{user.department}</p>
                 </div>
 
                 <div className="text-right">
-                  <p className="font-bold text-blue-600">{user.points.toLocaleString()}</p>
+                  <p className="font-bold text-primary">{user.points.toLocaleString()}</p>
                   <div className="flex space-x-1 text-xs text-gray-600">
                     <span>{user.ideasSubmitted}i</span>
                     <span>•</span>
@@ -346,8 +352,8 @@ export default function LeaderboardPage() {
               </div>
             ))}
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }

@@ -157,15 +157,17 @@ export default function SubmitIdea() {
   const CurrentStepIcon = steps[currentStep - 1].icon
 
   return (
-    <div className="p-6 max-w-4xl mx-auto space-y-6">
+    <div className="p-6 max-w-4xl mx-auto space-y-8 bg-gradient-to-br from-gray-50 to-white min-h-screen">
       {/* Header */}
-      <div className="text-center space-y-4">
-        <h1 className="text-3xl font-bold text-foreground">Nova Ideia</h1>
-        <p className="text-muted-foreground">Compartilhe sua ideia inovadora com a Eurofarma</p>
-        <div className="flex justify-center gap-2">
+      <div className="text-center space-y-6">
+        <div>
+          <h1 className="eurofarma-header eurofarma-gradient-text">Nova Ideia</h1>
+          <p className="eurofarma-subheader">Compartilhe sua ideia inovadora • Movidos pela vida</p>
+        </div>
+        <div className="flex justify-center gap-3">
           <Button 
             variant="outline" 
-            className="flex items-center gap-2"
+            className="eurofarma-button-secondary flex items-center gap-2"
             onClick={() => router.push("/ai-suggestions")}
           >
             <Sparkles className="h-4 w-4" />
@@ -173,7 +175,7 @@ export default function SubmitIdea() {
           </Button>
           <Button 
             variant="outline" 
-            className="flex items-center gap-2"
+            className="eurofarma-button-primary flex items-center gap-2"
             onClick={handleImportAISuggestion}
           >
             <Lightbulb className="h-4 w-4" />
@@ -183,55 +185,58 @@ export default function SubmitIdea() {
       </div>
 
       {/* Progress */}
-      <Card>
-        <CardContent className="pt-6">
-          <div className="space-y-4">
+      <div className="eurofarma-card">
+        <div className="p-6">
+          <div className="space-y-6">
             <div className="flex items-center justify-between">
-              <span className="text-sm font-medium">Progresso</span>
-              <span className="text-sm text-muted-foreground">Etapa {currentStep} de 4</span>
+              <span className="text-sm font-semibold text-gray-900">Progresso</span>
+              <span className="text-sm text-gray-600">Etapa {currentStep} de 4</span>
             </div>
-            <Progress value={progress} className="h-2" />
+            <Progress value={progress} className="h-3 bg-gray-200" />
 
             {/* Steps */}
             <div className="flex items-center justify-between">
               {steps.map((step) => {
                 const StepIcon = step.icon
                 return (
-                  <div key={step.number} className="flex flex-col items-center space-y-2">
+                  <div key={step.number} className="flex flex-col items-center space-y-3">
                     <div
                       className={cn(
-                        "flex items-center justify-center w-10 h-10 rounded-full border-2 transition-colors",
+                        "flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300",
                         currentStep >= step.number
-                          ? "bg-primary border-primary text-primary-foreground"
-                          : "border-muted-foreground text-muted-foreground",
+                          ? "bg-primary border-primary text-white shadow-md"
+                          : "border-gray-300 text-gray-400 bg-white",
                       )}
                     >
-                      <StepIcon className="h-4 w-4" />
+                      <StepIcon className="h-5 w-5" />
                     </div>
-                    <span className="text-xs font-medium text-center max-w-20">{step.title}</span>
+                    <span className="text-xs font-medium text-center max-w-24 text-gray-700">{step.title}</span>
                   </div>
                 )
               })}
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Form Steps */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
-            <CurrentStepIcon className="h-5 w-5" />
-            <span>{steps[currentStep - 1].title}</span>
-          </CardTitle>
-          <CardDescription>
-            {currentStep === 1 && "Vamos começar com as informações básicas da sua ideia"}
-            {currentStep === 2 && "Agora detalhe melhor sua proposta"}
-            {currentStep === 3 && "Qual o impacto esperado e recursos necessários?"}
-            {currentStep === 4 && "Revise todas as informações antes de enviar"}
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-6">
+      <div className="eurofarma-card">
+        <div className="p-6">
+          <div className="mb-6">
+            <div className="flex items-center space-x-3 mb-3">
+              <div className="p-2 rounded-full bg-primary/10">
+                <CurrentStepIcon className="h-6 w-6 text-primary" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900">{steps[currentStep - 1].title}</h3>
+            </div>
+            <p className="text-gray-600">
+              {currentStep === 1 && "Vamos começar com as informações básicas da sua ideia"}
+              {currentStep === 2 && "Agora detalhe melhor sua proposta"}
+              {currentStep === 3 && "Qual o impacto esperado e recursos necessários?"}
+              {currentStep === 4 && "Revise todas as informações antes de enviar"}
+            </p>
+          </div>
+          <div className="space-y-6">
           {/* Step 1: Basic Information */}
           {currentStep === 1 && (
             <div className="space-y-4">
@@ -278,12 +283,12 @@ export default function SubmitIdea() {
               </div>
 
               {/* AI Suggestion */}
-              <div className="p-4 bg-muted rounded-lg border border-dashed">
+              <div className="p-4 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-lg border border-primary/20">
                 <div className="flex items-center space-x-2 mb-2">
-                  <Sparkles className="h-4 w-4 text-accent" />
-                  <span className="text-sm font-medium">Sugestão da IA</span>
+                  <Sparkles className="h-4 w-4 text-primary" />
+                  <span className="text-sm font-semibold text-gray-900">Sugestão da IA</span>
                 </div>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-gray-600">
                   Com base no título, sugerimos adicionar tags: #IoT #Blockchain #Rastreabilidade
                 </p>
               </div>
@@ -394,15 +399,20 @@ export default function SubmitIdea() {
           )}
 
           {/* Navigation */}
-          <div className="flex items-center justify-between pt-6 border-t">
-            <div className="flex gap-2">
-              <Button variant="outline" onClick={handlePrevious} disabled={currentStep === 1}>
+          <div className="flex items-center justify-between pt-6 border-t border-gray-200">
+            <div className="flex gap-3">
+              <Button 
+                variant="outline" 
+                onClick={handlePrevious} 
+                disabled={currentStep === 1}
+                className="hover:bg-gray-50"
+              >
                 Anterior
               </Button>
               <Button 
                 variant="ghost" 
                 onClick={handleCancel} 
-                className="text-destructive hover:text-destructive/90 hover:bg-destructive/10"
+                className="text-red-600 hover:text-red-700 hover:bg-red-50"
                 disabled={isSubmitting}
               >
                 Cancelar
@@ -410,13 +420,16 @@ export default function SubmitIdea() {
             </div>
 
             {currentStep < 4 ? (
-              <Button onClick={handleNext}>
+              <Button 
+                onClick={handleNext}
+                className="eurofarma-button-primary"
+              >
                 Próximo
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Button>
             ) : (
               <Button 
-                className="bg-primary hover:bg-primary/90" 
+                className="eurofarma-button-primary" 
                 onClick={handleSubmit}
                 disabled={isSubmitting}
               >
@@ -425,8 +438,9 @@ export default function SubmitIdea() {
               </Button>
             )}
           </div>
-        </CardContent>
-      </Card>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
